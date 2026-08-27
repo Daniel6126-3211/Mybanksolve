@@ -1,0 +1,86 @@
+# Hello Premium — Real Login System (Setup Guide)
+
+## What this is
+A real Next.js + TypeScript signup/login system for Hello Premium, with
+actual hashed passwords, real sessions, and a real database — not a mockup.
+
+Users sign up and log in with their **phone number** (Nigerian format),
+matching how Hello Premium's audience actually identifies themselves,
+rather than usernames or email-first login.
+
+## Setup steps (same pattern as the Let Love Connect chat app)
+
+### 1. Create a Replit account
+Go to replit.com and sign up (free) if you haven't already.
+
+### 2. Create a new Repl
+- Tap "+ Create Repl"
+- Choose the **Node.js** template
+- Name it `hello-premium-auth`
+
+### 3. Upload all project files
+Keep the exact folder structure:
+
+```
+package.json
+tsconfig.json
+lib/
+  types.ts
+  db.ts
+  auth.ts
+  api.ts
+app/
+  layout.tsx
+  page.tsx
+  globals.css
+  login/page.tsx
+  signup/page.tsx
+  dashboard/page.tsx
+  api/
+    auth/
+      signup/route.ts
+      login/route.ts
+      me/route.ts
+```
+
+### 4. Set your JWT secret
+In Replit's **Secrets** panel (padlock icon), add:
+- Key: `JWT_SECRET`
+- Value: any long random string — generate one at
+  https://generate-secret.vercel.app/32
+
+### 5. Install dependencies
+In the Shell tab, run:
+```
+npm install
+```
+
+### 6. Run it
+Tap **Run**, or in the Shell run:
+```
+npm run dev
+```
+
+### 7. Test it
+Sign up with a real-looking Nigerian phone number (e.g. `0901 234 5678`)
+and a password of 8+ characters. You should land on a simple dashboard
+showing your name and phone number. Log out (clear cookies) and log back in
+with the same number typed differently (e.g. `+234 901 234 5678`) — it
+should still find your account, since phone numbers are normalized to a
+consistent format regardless of how they're typed.
+
+## What's real here
+Password hashing (bcrypt), signed sessions (JWT in an httpOnly cookie),
+phone number normalization and validation, duplicate-account prevention,
+rate-limited login attempts, a real SQLite database that persists your
+account between visits.
+
+## What's not built yet
+This is authentication only — it doesn't yet include Hello Premium's
+banking/POS/bills/jobs features from the original spec. Those would be
+built as protected pages/routes on top of this login system next, the same
+way Feed and Upgrade were added on top of Let Love Connect's login.
+
+## If something breaks
+Copy the exact error text from Replit's Shell or browser console and send
+it over.
