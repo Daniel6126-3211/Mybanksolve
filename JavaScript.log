@@ -1,0 +1,16 @@
+const loginBtn = document.getElementById("loginBtn");
+const username = document.getElementById("username");
+
+loginBtn.addEventListener("click", () => {
+  if(username.value.trim() === "" || password.value.trim() === "") {
+    message.textContent = "Please enter username and password";
+    message.style.color = "#ef4444";
+  } else if(password.value.length < 5) {
+    message.textContent = "Password too weak for login";
+    message.style.color = "#ef4444";
+  } else {
+    message.textContent = "Login successful!";
+    message.style.color = "#22c55e";
+    // Here you can redirect: window.location.href = "dashboard.html";
+  }
+});
